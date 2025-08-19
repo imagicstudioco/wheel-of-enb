@@ -26,7 +26,6 @@ export default function SpinWheelGame() {
     setIsSpinning(true)
     setResult(null)
 
-    // Random rotation (5–8 full spins + random segment)
     const minSpins = 5
     const maxSpins = 8
     const spins = Math.random() * (maxSpins - minSpins) + minSpins
@@ -59,14 +58,20 @@ export default function SpinWheelGame() {
 
           {/* Wheel Container */}
           <div className="relative mx-auto w-80 h-80 sm:w-96 sm:h-96">
-            {/* Arrow Pointer */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 z-20">
-              <div className="w-0 h-0 border-l-4 border-r-4 border-b-8 border-l-transparent border-r-transparent border-b-red-600 drop-shadow-lg"></div>
+            {/* Needle Pointer */}
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center">
+              {/* Needle base */}
+              <div className="w-2 h-10 bg-gray-800 rounded-t-md shadow-md"></div>
+              {/* Needle head (triangle) */}
+              <div className="w-0 h-0 
+                border-l-[12px] border-r-[12px] border-t-[20px]
+                border-l-transparent border-r-transparent border-t-red-600
+                drop-shadow-lg"></div>
             </div>
 
             {/* Wheel with conic-gradient */}
             <div
-              className="relative w-full h-full rounded-full border-8 border-gray-800 shadow-2xl transition-transform duration-[3000ms] ease-out flex items-center justify-center"
+              className="relative w-full h-full rounded-full border-8 border-gray-800 shadow-2xl transition-transform duration-[3000ms] ease-out flex items-center justify-center z-10"
               style={{
                 transform: `rotate(${rotation}deg)`,
                 background: `conic-gradient(
@@ -83,7 +88,7 @@ export default function SpinWheelGame() {
             >
               {/* Segment Labels */}
               {segments.map((segment, index) => {
-                const angle = (360 / segments.length) * index + 22.5 // 22.5 = center of 45°
+                const angle = (360 / segments.length) * index + 22.5
                 return (
                   <div
                     key={segment.id}
@@ -99,7 +104,7 @@ export default function SpinWheelGame() {
               })}
 
               {/* Center Circle */}
-              <div className="absolute w-10 h-10 bg-gray-800 rounded-full border-4 border-white shadow-lg z-10"></div>
+              <div className="absolute w-10 h-10 bg-gray-800 rounded-full border-4 border-white shadow-lg z-20"></div>
             </div>
           </div>
 
